@@ -14,12 +14,12 @@ The generic MessageOrm is the base class that all messages should extend, so if 
 
     }//class
 
-The messages are passed back and forth using the MessageInterface class, specifically, the classes the extend MessageInterface (eg, `DropfileInterface` and `NetGearmanInterface`). So, for example, to have our `EmailMsg` class use the DropfileInterface:
+The messages are passed back and forth using the `MessageInterface` class, specifically, the classes the extend `MessageInterface` (eg, `DropfileInterface` and `NetGearmanInterface`). So, for example, to have our `EmailMsg` class use the `DropfileInterface`:
 
     $interface = new DropfileInterface();
     $interface->setHost('path/to/store/messages');
 
-    $email = array(
+    $msg = array(
       'to' => 'bob@example.com',
       'from' => 'alice@example.com',
       'title' => 'test email',
