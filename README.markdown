@@ -1,3 +1,7 @@
+# What do you use message passing for?
+
+Message passing is great when you want to move some functionality of your code to the backend where it can be processed without making the user, or the code, wait.
+
 # How the messaging system works
 
 The generic MessageOrm is the base class that all messages should extend, so if you want an email message, you would do:
@@ -14,7 +18,7 @@ The generic MessageOrm is the base class that all messages should extend, so if 
 
     }//class
 
-The messages are passed back and forth using the `MessageInterface` class, specifically, the classes the extend `MessageInterface` (eg, `DropfileInterface` and `NetGearmanInterface`). So, for example, to have our `EmailMsg` class use the `DropfileInterface`:
+The messages are passed back and forth using the `MessageInterface` class, specifically, the classes that extend `MessageInterface` (eg, `DropfileInterface` and `NetGearmanInterface`). So, for example, to have our `EmailMsg` class use the `DropfileInterface`:
 
     $interface = new DropfileInterface();
     $interface->setHost('path/to/store/messages');
@@ -29,7 +33,7 @@ The messages are passed back and forth using the `MessageInterface` class, speci
     $email_msg = new EmailMsg($interface);
     $email_msg->publish($msg);
 
-Now to process that message somewhere else:
+Now to process that message in another script somewhere else:
 
     $interface = new DropfileInterface();
     $interface->setHost('path/to/store/messages');
@@ -41,13 +45,15 @@ Take a look at the `MessageOrm` class to see how to use the other consume method
 
 # Adding Your Interface
 
-The included interfaces happen to be the interfaces we use at [Plancast](http://plancast.com), but you can add your own interface just by extending `MessageInterface` and implementing the required abstract methods.
+The included interfaces happen to be the interfaces we use at [Plancast](http://plancast.com), but you can add your own interface just by extending `MessageInterface` and implementing the required abstract methods. So, for instance, if you wanted to use [RabbitMQ](http://www.rabbitmq.com/) to pass messages you would just need to extend `MessageInterface` and implement the required methods to interact with RabbitMQ.
 
 # Dependencies
 
 PHP >= 5.0
 
 We've tested this on php 5.2.4 and 5.3 but I think it should work on anything 5.0. The tests require PHPUnit.
+
+The code should run on both Windows and Linux.
 
 # License
 
