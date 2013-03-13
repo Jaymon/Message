@@ -1,8 +1,12 @@
-# What do you use message passing for?
+# Message
+
+An easy to use Message passing library for PHP. This library aims to be so easy to use you can use it on almost all your project and in almost any environment using the dropfile interface (basically just text files) so you can integrate it into your code and then switch out interfaces to something more robust and distributed (like Gearman or RabbitMQ) if the need ever arises.
+
+## What do you use message passing for?
 
 Message passing is great when you want to move some functionality of your code to the backend where it can be processed without making the user, or the code, wait.
 
-# How the messaging system works
+## How the messaging system works
 
 The generic MessageOrm is the base class that all messages should extend, so if you want an email message, you would do:
 
@@ -43,11 +47,13 @@ Now to process that message in another script somewhere else:
         
 Take a look at the `MessageOrm` class to see how to use the other consume methods like `consumeForCount()` or `consumeForTime()`.
 
-# Adding Your Interface
+The `$msg` array has no set structure, so you can pass pretty much add anything you want to it.
 
-The included interfaces happen to be the interfaces we use at [Plancast](http://plancast.com), but you can add your own interface just by extending `MessageInterface` and implementing the required abstract methods. So, for instance, if you wanted to use [RabbitMQ](http://www.rabbitmq.com/) to pass messages you would just need to extend `MessageInterface` and implement the required methods to interact with RabbitMQ.
+## Adding Interfaces
 
-# Dependencies
+The included interfaces happen to be the interfaces we used at [Plancast](http://plancast.com), but you can add your own interface just by extending `MessageInterface` and implementing the required abstract methods. So, for instance, if you wanted to use [RabbitMQ](http://www.rabbitmq.com/) to pass messages you would just need to extend `MessageInterface` and implement the required methods to interact with RabbitMQ.
+
+## Dependencies
 
 PHP >= 5.0
 
@@ -55,6 +61,6 @@ We've tested this on php 5.2.4 and 5.3 but I think it should work on anything 5.
 
 The code should run on both Windows and Linux.
 
-# License
+## License
 
 [The MIT License](http://www.opensource.org/licenses/mit-license.php)
